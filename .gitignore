@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Окружение и секреты
+.env
+.env.local
+
+# База
+*.db
+*.sqlite
+*.sqlite3
+tracker.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Логи
+*.log
+
+# Локальные заметки
+.claude/
+CLAUDE.md
+notes/
