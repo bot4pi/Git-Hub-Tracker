@@ -83,7 +83,7 @@ def format_repo_report(owner: str, repo: str, compare: dict, lang: str = "ru") -
         date = _fmt_iso(author.get("date"))
         lines.append(
             f'• <a href="{esc(url)}"><code>{esc(sha)}</code></a> — {esc(msg)}\n'
-            f"  👤 {esc(author_name)}  {e(DUCK_WATCH)} {date}"
+            f"  {e(DUCK_PERSON)} {esc(author_name)}  {e(DUCK_WATCH)} {date}"
         )
 
     if total > MAX_COMMITS:
@@ -123,7 +123,7 @@ def format_single_commit(owner: str, repo: str, commit_detail: dict, lang: str =
     lines.append("")
     lines.append(
         f'• <a href="{esc(url)}"><code>{esc(sha)}</code></a> — {esc(msg)}\n'
-        f"  👤 {esc(author_name)}  {e(DUCK_WATCH)} {date}"
+        f"  {e(DUCK_PERSON)} {esc(author_name)}  {e(DUCK_WATCH)} {date}"
     )
 
     if files:

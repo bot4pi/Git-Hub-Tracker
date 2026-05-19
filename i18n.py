@@ -240,7 +240,7 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "report_changed_files":"📁 <b>Изменённые файлы ({count}):</b>",
         "report_user_activity":(
             "{person} <b>Активность пользователя</b>\n"
-            '👤 <a href="https://github.com/{login}">{login}</a>'
+            '{person} <a href="https://github.com/{login}">{login}</a>'
         ),
         "report_org_activity": (
             "{building} <b>Активность организации</b>\n"
@@ -463,7 +463,7 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "report_changed_files":"📁 <b>Changed files ({count}):</b>",
         "report_user_activity":(
             "{person} <b>User activity</b>\n"
-            '👤 <a href="https://github.com/{login}">{login}</a>'
+            '{person} <a href="https://github.com/{login}">{login}</a>'
         ),
         "report_org_activity": (
             "{building} <b>Organization activity</b>\n"
