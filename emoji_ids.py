@@ -33,7 +33,17 @@ FALLBACK = {
 }
 
 
+import os
+
+# Если есть Premium у владельца бота и заполнены реальные ID — включить.
+# По умолчанию выключено: ID в этом файле — заглушки, Telegram отдаёт
+# DOCUMENT_INVALID если ID не существует.
+USE_CUSTOM_EMOJI = os.getenv("USE_CUSTOM_EMOJI", "0") == "1"
+
+
 def e(emoji_id: str) -> str:
-    """Вернуть HTML-тег кастомного emoji с запасным символом."""
+    """Вернуть кастомный emoji (если включено) или fallback-символ."""
     fallback = FALLBACK.get(emoji_id, "•")
+    if not USE_CUSTOM_EMOJI:
+        return fallback
     return f'<tg-emoji emoji-id="{emoji_id}">{fallback}</tg-emoji>'
