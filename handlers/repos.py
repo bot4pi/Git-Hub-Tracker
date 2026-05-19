@@ -6,7 +6,7 @@ import database as db
 from config import BOT_TOKEN
 from emoji_ids import e, DUCK_CHECK, DUCK_TRASH, DUCK_LAPTOP, DUCK_SEARCH
 from formatter import esc
-from github_client import parse_repo_url, repo_exists
+from github_client import fetch_latest_commit, parse_repo_url, repo_exists
 from i18n import t
 from keyboards import send_message, kb_after_add, kb_after_remove
 
@@ -46,8 +46,13 @@ async def cmd_addrepo(message: Message, command: CommandObject) -> None:
         )
         return
 
+    # Seed last_sha сразу при добавлении, чтобы первый scheduler-run
+    # не съел свежие коммиты, сделанные между /addrepo и тиком.
+    latest = await fetch_latest_commit(owner, repo)
+    seed_sha = (latest or {}).get("sha")
+
     repo_url = f"https://github.com/{owner}/{repo}"
-    ok = await db.add_repo(message.from_user.id, repo_url, owner, repo)
+    ok = await db.add_repo(message.from_user.id, repo_url, owner, repo, last_sha=seed_sha)
     if not ok:
         await send_message(
             BOT_TOKEN,

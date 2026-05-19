@@ -54,12 +54,19 @@ async def init_db() -> None:
 
 # --- Репозитории --------------------------------------------------------
 
-async def add_repo(user_id: int, repo_url: str, owner: str, repo_name: str) -> bool:
+async def add_repo(
+    user_id: int,
+    repo_url: str,
+    owner: str,
+    repo_name: str,
+    last_sha: Optional[str] = None,
+) -> bool:
     try:
         async with aiosqlite.connect(DB_PATH) as db:
             await db.execute(
-                "INSERT INTO tracked_repos (user_id, repo_url, owner, repo_name) VALUES (?, ?, ?, ?)",
-                (user_id, repo_url, owner.lower(), repo_name.lower()),
+                "INSERT INTO tracked_repos (user_id, repo_url, owner, repo_name, last_sha) "
+                "VALUES (?, ?, ?, ?, ?)",
+                (user_id, repo_url, owner.lower(), repo_name.lower(), last_sha),
             )
             await db.commit()
         return True
@@ -106,12 +113,17 @@ async def update_repo_sha(repo_id: int, sha: str) -> None:
 
 # --- GitHub пользователи ------------------------------------------------
 
-async def add_github_user(user_id: int, github_login: str) -> bool:
+async def add_github_user(
+    user_id: int,
+    github_login: str,
+    last_event_id: Optional[str] = None,
+) -> bool:
     try:
         async with aiosqlite.connect(DB_PATH) as db:
             await db.execute(
-                "INSERT INTO tracked_github_users (user_id, github_login) VALUES (?, ?)",
-                (user_id, github_login.lower()),
+                "INSERT INTO tracked_github_users (user_id, github_login, last_event_id) "
+                "VALUES (?, ?, ?)",
+                (user_id, github_login.lower(), last_event_id),
             )
             await db.commit()
         return True
@@ -161,12 +173,17 @@ async def update_github_user_event(tracked_id: int, event_id: str) -> None:
 
 # --- Организации -------------------------------------------------------
 
-async def add_org(user_id: int, org_login: str) -> bool:
+async def add_org(
+    user_id: int,
+    org_login: str,
+    last_event_id: Optional[str] = None,
+) -> bool:
     try:
         async with aiosqlite.connect(DB_PATH) as db:
             await db.execute(
-                "INSERT INTO tracked_orgs (user_id, org_login) VALUES (?, ?)",
-                (user_id, org_login.lower()),
+                "INSERT INTO tracked_orgs (user_id, org_login, last_event_id) "
+                "VALUES (?, ?, ?)",
+                (user_id, org_login.lower(), last_event_id),
             )
             await db.commit()
         return True

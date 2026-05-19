@@ -1,5 +1,6 @@
 import asyncio
 import logging
+from datetime import datetime, timedelta
 
 from aiogram.exceptions import TelegramForbiddenError
 
@@ -187,11 +188,14 @@ async def run_check_cycle() -> None:
 
 
 def setup_scheduler(scheduler) -> None:
+    # next_run_time через 10 секунд после старта, далее каждые CHECK_INTERVAL.
+    # ВНИМАНИЕ: передавать next_run_time=None нельзя — APScheduler трактует
+    # это как «без расписания» и job никогда не выстреливает.
     scheduler.add_job(
         run_check_cycle,
         trigger="interval",
         seconds=CHECK_INTERVAL,
-        next_run_time=None,
+        next_run_time=datetime.now() + timedelta(seconds=10),
         id="check_cycle",
         max_instances=1,
         coalesce=True,

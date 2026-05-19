@@ -8,7 +8,7 @@ import database as db
 from config import BOT_TOKEN
 from emoji_ids import e, DUCK_CHECK, DUCK_TRASH, DUCK_BUILDING, DUCK_SEARCH
 from formatter import esc
-from github_client import org_exists
+from github_client import fetch_org_events, org_exists
 from i18n import t
 from keyboards import send_message, kb_after_add, kb_after_remove
 
@@ -51,7 +51,10 @@ async def cmd_addorg(message: Message, command: CommandObject) -> None:
         )
         return
 
-    ok = await db.add_org(message.from_user.id, arg)
+    events = await fetch_org_events(arg)
+    seed_event = events[0]["id"] if events else None
+
+    ok = await db.add_org(message.from_user.id, arg, last_event_id=seed_event)
     if not ok:
         await send_message(
             BOT_TOKEN,
