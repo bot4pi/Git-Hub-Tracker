@@ -216,7 +216,7 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "list_section_repos":  "{laptop} <b>Репозитории ({count}):</b>",
         "list_section_users":  "{person} <b>Пользователи ({count}):</b>",
         "list_section_orgs":   "{building} <b>Организации ({count}):</b>",
-        "list_next_check":     "🕐 Следующая проверка через ~{minutes} мин.",
+        "list_next_check":     "{watch} Следующая проверка через ~{minutes} мин.",
         "list_empty": (
             "{search} <b>Ты ещё ничего не отслеживаешь.</b>\n\n"
             "Добавь первый объект:\n"
@@ -441,7 +441,7 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "list_section_repos":  "{laptop} <b>Repositories ({count}):</b>",
         "list_section_users":  "{person} <b>Users ({count}):</b>",
         "list_section_orgs":   "{building} <b>Organizations ({count}):</b>",
-        "list_next_check":     "🕐 Next check in ~{minutes} min.",
+        "list_next_check":     "{watch} Next check in ~{minutes} min.",
         "list_empty": (
             "{search} <b>You are not tracking anything yet.</b>\n\n"
             "Add your first target:\n"

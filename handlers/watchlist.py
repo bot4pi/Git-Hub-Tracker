@@ -11,6 +11,7 @@ from emoji_ids import (
     DUCK_PERSON,
     DUCK_BUILDING,
     DUCK_SEARCH,
+    DUCK_WATCH,
 )
 from formatter import esc
 from i18n import t
@@ -53,7 +54,7 @@ async def _render_list(user_id: int, lang: str) -> tuple[str, list]:
         lines.append("")
 
     minutes = max(1, CHECK_INTERVAL // 60)
-    lines.append(t("list_next_check", lang, minutes=minutes))
+    lines.append(t("list_next_check", lang, watch=e(DUCK_WATCH), minutes=minutes))
 
     return "\n".join(lines), kb_after_add(lang)
 

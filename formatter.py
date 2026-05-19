@@ -9,6 +9,7 @@ from emoji_ids import (
     DUCK_PERSON,
     DUCK_BUILDING,
     DUCK_CHECK,
+    DUCK_WATCH,
 )
 from i18n import t
 
@@ -82,7 +83,7 @@ def format_repo_report(owner: str, repo: str, compare: dict, lang: str = "ru") -
         date = _fmt_iso(author.get("date"))
         lines.append(
             f'• <a href="{esc(url)}"><code>{esc(sha)}</code></a> — {esc(msg)}\n'
-            f"  👤 {esc(author_name)}  🕐 {date}"
+            f"  👤 {esc(author_name)}  {e(DUCK_WATCH)} {date}"
         )
 
     if total > MAX_COMMITS:
@@ -122,7 +123,7 @@ def format_single_commit(owner: str, repo: str, commit_detail: dict, lang: str =
     lines.append("")
     lines.append(
         f'• <a href="{esc(url)}"><code>{esc(sha)}</code></a> — {esc(msg)}\n'
-        f"  👤 {esc(author_name)}  🕐 {date}"
+        f"  👤 {esc(author_name)}  {e(DUCK_WATCH)} {date}"
     )
 
     if files:
@@ -224,7 +225,7 @@ def _format_event_line(ev: dict, lang: str) -> Optional[str]:
     else:
         return None
 
-    return f"• {head}\n  {body}\n  🕐 {date}"
+    return f"• {head}\n  {body}\n  {e(DUCK_WATCH)} {date}"
 
 
 def format_user_events_report(login: str, events: list[dict], lang: str = "ru") -> Optional[str]:
