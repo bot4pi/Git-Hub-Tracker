@@ -5,7 +5,7 @@ load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "").strip()
-CHECK_INTERVAL = int(os.getenv("CHECK_INTERVAL", "600"))
+CHECK_INTERVAL = int(os.getenv("CHECK_INTERVAL", "300"))
 DB_PATH = os.getenv("DB_PATH", "tracker.db").strip()
 
 if not BOT_TOKEN:
